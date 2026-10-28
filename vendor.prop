@@ -4,8 +4,6 @@ ro.vendor.mtk_audio_ape_support=1
 ro.vendor.mtk_audio_tuning_tool_ver=V2.2
 ro.config.alarm_vol_steps=25
 ro.config.media_vol_steps=25
-ro.config.notification_vol_steps=25
-ro.config.ring_vol_steps=25
 ro.config.vc_call_vol_steps=25
 
 # Camera
@@ -55,19 +53,16 @@ ro.vendor.mtk_widevine_drm_l1_support=1
 ro.vendor.mtk_sec_video_path_support=1
 
 # FM Radio
-fmradio.driver.enable=0
 persist.vendor.connsys.fm_chipid=mt6631
 
 # GPS
 ro.vendor.mtk_gps_support=1
 
 # Lockscreen
-lockscreen.rot_override=true
 
 # Logging
 vendor.debug.log.coredump.enable=n
 ro.vendor.connsys.dedicated.log=1
-persist.meta.dumpdata=0
 persist.log.tag.DCT=D
 persist.vendor.log.tel_log_ctrl=1
 persist.log.tag.RtcEccNumberController=D
@@ -82,7 +77,6 @@ persist.log.tag.RtcRatSwCtrl=D
 persist.log.tag.MtkPhoneSwitcher=D
 
 # Media
-ro.have_aacencode_feature=1
 vendor.mtk.vdec.waitkeyframeforplay=9
 ro.vendor.mtk_wmv_playback_support=1
 ro.vendor.mtk_support_mp2_playback=1
@@ -95,9 +89,6 @@ ro.vendor.mediatek.version.branch=alps-mp-q0.mp1
 ro.vendor.mediatek.version.release=alps-mp-q0.mp1-V9.56_lenovo.q0mp1.tb8788p1.64.bsp_P3
 
 # RIL
-ro.telephony.sim.count=2
-persist.radio.default.sim=0
-persist.radio.mobile.data=0,0
 persist.vendor.radio.fd.counter=150
 persist.vendor.radio.fd.off.counter=50
 persist.vendor.radio.fd.r8.counter=150
@@ -153,10 +144,8 @@ ro.surface_flinger.max_frame_buffer_acquired_buffers=3
 ro.surface_flinger.running_without_sync_framework=true
 debug.renderengine.backend=threaded
 debug.sf.disable_backpressure=1
-ro.sf.hwrotation=0
 
 # USB
-persist.sys.usb.config=adb
 
 # Wi-Fi
 ro.vendor.wlan.gen=gen4m

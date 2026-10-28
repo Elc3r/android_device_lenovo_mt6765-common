@@ -1,0 +1,5 @@
+allow hal_sensors_default sensors_device:chr_file { open read write };
+allow hal_sensors_default vendor_sysfs_sensor_control:file { open read write };
+allow hal_sensors_default vendor_sensor_calibration_file:file { open read write };
+allow hal_vibrator_default sysfs_leds:dir search;
+allowxperm hal_keymaster_default tee_device:chr_file ioctl { 0xa400 0xa401 0xa402 0xa403 0xa408 };

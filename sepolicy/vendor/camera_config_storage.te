@@ -1,0 +1,21 @@
+# Optional administrator-provisioned overrides and property-gated exports.
+# Normal boot creates neither this directory nor any configuration file.
+type vendor_camera_config_dir, file_type, data_file_type;
+type vendor_camera_setting_config, file_type, data_file_type;
+type vendor_camera_tuning_config, file_type, data_file_type;
+type vendor_camera_config_export, file_type, data_file_type;
+
+allow hal_camera_default vendor_camera_config_dir:dir { search write add_name };
+type_transition hal_camera_default vendor_camera_config_dir:file vendor_camera_setting_config "s.json";
+type_transition hal_camera_default vendor_camera_config_dir:file vendor_camera_tuning_config "t.json";
+type_transition hal_camera_default vendor_camera_config_dir:file vendor_camera_config_export "s.h";
+type_transition hal_camera_default vendor_camera_config_dir:file vendor_camera_config_export "t.h";
+allow hal_camera_default { vendor_camera_setting_config vendor_camera_tuning_config }:file { getattr open read create write };
+allow hal_camera_default vendor_camera_config_export:file { open create write };
+
+# Permit explicit provisioning under the matching path, not camera creation of it.
+allow vendor_init vendor_camera_config_dir:dir create_dir_perms;
+neverallow hal_camera_default vendor_camera_config_dir:dir { create rmdir rename remove_name setattr };
+neverallow hal_camera_default vendor_camera_config_dir:file *;
+neverallow hal_camera_default { vendor_camera_setting_config vendor_camera_tuning_config vendor_camera_config_export }:file { unlink rename link };
+neverallow appdomain { vendor_camera_setting_config vendor_camera_tuning_config vendor_camera_config_export }:file no_rw_file_perms;

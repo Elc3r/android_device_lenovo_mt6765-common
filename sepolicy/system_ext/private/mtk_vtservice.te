@@ -1,0 +1,8 @@
+type mtk_vtservice, domain, coredomain;
+type mtk_vtservice_exec, exec_type, system_file_type, file_type;
+type mtk_vt_service, service_manager_type;
+typeattribute mtk_vtservice mtk_vt_vendor_config_reader;
+
+init_daemon_domain(mtk_vtservice)
+binder_use(mtk_vtservice)
+add_service(mtk_vtservice, mtk_vt_service)

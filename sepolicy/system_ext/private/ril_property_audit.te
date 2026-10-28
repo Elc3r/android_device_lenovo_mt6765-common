@@ -1,0 +1,10 @@
+type ril_property_audit_file, file_type;
+
+userdebug_or_eng(`
+    type_transition init device:file ril_property_audit_file "lineage_ril_property_audit";
+    allow init ril_property_audit_file:file { create open read write getattr setattr map };
+    allow su ril_property_audit_file:file { getattr open read };
+')
+
+neverallow { appdomain userdebug_or_eng(`-su') } ril_property_audit_file:file no_rw_file_perms;
+neverallow { domain -coredomain -vendor_init -su } ril_property_audit_file:file no_rw_file_perms;

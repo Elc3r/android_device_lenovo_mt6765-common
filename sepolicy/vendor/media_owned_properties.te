@@ -1,0 +1,12 @@
+vendor_restricted_prop(vendor_camera_dump_control_prop)
+vendor_restricted_prop(vendor_omx_core_log_prop)
+
+get_prop(hal_camera_default, vendor_camera_dump_control_prop)
+get_prop(mediacodec, vendor_omx_core_log_prop)
+set_prop(vendor_init, vendor_camera_dump_control_prop)
+set_prop(vendor_init, vendor_omx_core_log_prop)
+
+neverallow { domain -init -vendor_init } { vendor_camera_dump_control_prop vendor_omx_core_log_prop }:property_service set;
+neverallow appdomain { vendor_camera_dump_control_prop vendor_omx_core_log_prop }:file no_rw_file_perms;
+neverallow mediacodec vendor_camera_dump_control_prop:file no_rw_file_perms;
+neverallow hal_camera_default vendor_omx_core_log_prop:file no_rw_file_perms;

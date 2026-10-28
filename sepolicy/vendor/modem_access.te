@@ -1,0 +1,35 @@
+allow vendor_ccci_fsd vendor_modem_nvram_file:dir { getattr open read search };
+allow vendor_ccci_fsd vendor_modem_nvram_file:file { getattr open read };
+allow vendor_ccci_fsd vendor_modem_nvdata_file:dir { getattr open read search write add_name };
+allow vendor_ccci_fsd vendor_modem_nvdata_file:file { create getattr open read write };
+
+allow vendor_ccci_fsd vendor_ccci_fs_device:chr_file { open read write };
+allow { vendor_ccci_fsd vendor_ccci_mdinit } vendor_ccci_status_device:chr_file { open read write };
+allow vendor_ccci_rpcd vendor_ccci_rpc_device:chr_file { open read write };
+allow vendor_ccci_mdinit vendor_ccci_monitor_device:chr_file { open read write ioctl };
+allowxperm vendor_ccci_mdinit vendor_ccci_monitor_device:chr_file ioctl { 0x4301 0x4308 0x430c 0x430d 0x4319 0x431d 0x431f 0x432f 0x433b 0x4348 };
+allow vendor_ccci_mdinit vendor_ccci_ipc_device:chr_file { open read write ioctl };
+allowxperm vendor_ccci_mdinit vendor_ccci_ipc_device:chr_file ioctl { 0x5004 0x5005 0x5006 };
+
+allow rild vendor_ccci_xcap_device:chr_file { open read write ioctl };
+allowxperm rild vendor_ccci_xcap_device:chr_file ioctl { 0x4301 };
+allow rild vendor_ccci_ioctl_device:chr_file { open read write ioctl };
+allowxperm rild vendor_ccci_ioctl_device:chr_file ioctl { 0x431f 0x4337 };
+
+allow hal_audio_default vendor_ccci_audio_device:chr_file { open read write ioctl };
+allowxperm hal_audio_default vendor_ccci_audio_device:chr_file ioctl { 0x4301 };
+allow hal_audio_default vendor_ccci_raw_audio_device:chr_file { open read write ioctl };
+allowxperm hal_audio_default vendor_ccci_raw_audio_device:chr_file ioctl { 0x4330 0x4331 };
+
+allow { vendor_ccci_fsd vendor_ccci_rpcd hal_audio_default } vendor_sysfs_ccci_version:file { open read };
+allow vendor_ccci_fsd vendor_sysfs_boot_type:file { open read };
+
+allow { rild vendor_ccci_mdinit vendor_volte_md_status } vendor_ccci_mdx_status_device:chr_file { open read write };
+allow { rild vendor_volte_md_status } vendor_ccci_mdx_status_device:chr_file ioctl;
+allowxperm { rild vendor_volte_md_status } vendor_ccci_mdx_status_device:chr_file ioctl { 0x4200 };
+# MD1 failure cleanup: query reset-lock count and enumerate outstanding users.
+# Do not grant the neighboring reset-lock acquire/release commands to mdinit.
+allow vendor_ccci_mdinit vendor_ccci_mdx_status_device:chr_file ioctl;
+allowxperm vendor_ccci_mdinit vendor_ccci_mdx_status_device:chr_file ioctl { 0x4202 0x4203 };
+allow vendor_ccci_mdinit vendor_ccci_ccb_device:chr_file { open read write ioctl };
+allowxperm vendor_ccci_mdinit vendor_ccci_ccb_device:chr_file ioctl { 0x433f 0x4340 0x4347 };

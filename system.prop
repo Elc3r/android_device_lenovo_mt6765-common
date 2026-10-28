@@ -1,4 +1,6 @@
 # Audio
+ro.config.notification_vol_steps=25
+ro.config.ring_vol_steps=25
 ro.audio.silent=0
 audio.dsp.data.factor=0.11
 ro.audio.monitorRotation=true
@@ -28,6 +30,18 @@ ro.mtk_perf_response_time=1
 ro.sys.usb.bicr=no
 ro.sys.usb.charging.only=yes
 ro.sys.usb.mtp.whql.enable=0
+
+# Platform-owned defaults must be loaded as init, not from vendor/build.prop.
+# Values are unchanged from the former vendor.prop entries.
+fmradio.driver.enable=0
+lockscreen.rot_override=true
+persist.meta.dumpdata=0
+ro.have_aacencode_feature=1
+ro.telephony.sim.count=2
+persist.radio.default.sim=0
+persist.radio.mobile.data=0,0
+ro.sf.hwrotation=0
+persist.sys.usb.config=adb
 ro.sys.usb.storage.type=adb
 ro.vendor.usb.vid=0x17EF
 

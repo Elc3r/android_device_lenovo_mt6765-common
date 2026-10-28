@@ -1,0 +1,48 @@
+allow { hal_audio_default hal_bluetooth_default vendor_ccci_mdinit vendor_fuelgauged_nvram vendor_nvram_daemon } proc_cmdline:file { getattr open read };
+allow { hal_audio_default vendor_ccci_mdinit vendor_fuelgauged_nvram vendor_nvram_daemon } sysfs_dt_firmware_android:dir search;
+allow { hal_audio_default vendor_ccci_mdinit vendor_fuelgauged_nvram vendor_nvram_daemon } sysfs_dt_firmware_android:file { getattr open read };
+allow { hal_audio_default vendor_ccci_mdinit vendor_fuelgauged_nvram vendor_nvram_daemon } vendor_sysfs_boot_mode:file { open read };
+allow { hal_audio_default hal_camera_default mediacodec } vendor_sysfs_devinfo:file { open read };
+
+allow { hal_audio_default hal_bluetooth_default vendor_ccci_mdinit vendor_fuelgauged_nvram vendor_nvram_daemon } vendor_nvram_version_file:file { getattr open read };
+allow hal_audio_default vendor_audio_calibration_file:file { getattr open read };
+allow hal_bluetooth_default vendor_nvram_bt_file:file { getattr open read };
+allow vendor_nvram_daemon vendor_nvram_bt_file:file { getattr open read write };
+allow vendor_nvram_daemon vendor_nvram_restore_file:file { getattr open read };
+allow vendor_nvram_daemon vendor_modem_nvram_file:dir getattr;
+allow vendor_wlan_assistant vendor_nvram_wifi_file:file { getattr open read };
+allow vendor_ccci_mdinit vendor_modem_sbp_file:file { getattr open read write };
+type_transition vendor_ccci_mdinit vendor_modem_config_dir:file vendor_modem_timezone_file "timezone";
+type_transition vendor_init vendor_modem_config_dir:file vendor_modem_timezone_file "timezone";
+allow vendor_ccci_mdinit vendor_modem_config_dir:dir { getattr search write add_name };
+allow vendor_ccci_mdinit vendor_modem_timezone_file:file { create open read write };
+allow vendor_ccci_fsd vendor_modem_info_file:file { getattr open read write };
+allow vendor_ccci_fsd vendor_modem_protect_file:file { getattr open read };
+# Existing NA77 records are opened O_RDWR|O_CREAT by FS_CCCI_Open (flag 0x10400).
+# Do not grant create/delete/attribute changes or writes to other protect files.
+# SELinux write is not a byte/value or O_TRUNC argument filter.
+allow vendor_ccci_fsd vendor_modem_na77_file:file { getattr open read write };
+allow { hal_audio_default hal_bluetooth_default hal_sensors_default vendor_nvram_daemon vendor_fuelgauged_nvram vendor_fuelgauged vendor_ccci_mdinit vendor_wlan_assistant } vendor_nvram_config_dir:dir { getattr search };
+allow { vendor_ccci_fsd vendor_fuelgauged vendor_fuelgauged_nvram vendor_nvram_daemon vendor_mtk_agpsd } mnt_vendor_file:dir getattr;
+
+allow vendor_fuelgauged_nvram { vendor_fg_calibration_file vendor_fg_nvram_file }:file getattr;
+allow vendor_nvram_daemon vendor_nvram_wifi_file:file { getattr open read };
+allow vendor_ccci_fsd vendor_sysfs_mmc_wp_size:file { getattr open read };
+allow vendor_ccci_mdinit vendor_sysfs_ccci_lk:file { open read };
+allow { vendor_ccci_mdinit vendor_gsm0710muxd } vendor_sysfs_ccci_version:file { open read };
+wakelock_use(vendor_ccci_fsd)
+allow vendor_ccci_mdinit vendor_sysfs_ccci_config:file { open read };
+allow vendor_ccci_fsd vendor_modem_partition_info:file { getattr open read };
+allow vendor_nvram_daemon vendor_nvram_adc_file:file { getattr open read write };
+allow vendor_nvram_daemon vendor_nvram_wifi_custom_file:file { getattr open read };
+
+# Parent traversal only; existing leaf permissions remain unchanged.
+allow { vendor_fuelgauged vendor_fuelgauged_nvram } vendor_fg_parent_dir:dir search;
+allow vendor_fuelgauged_nvram vendor_fg_parent_dir:dir getattr;
+allow hal_sensors_default vendor_sensor_parent_dir:dir search;
+allow hal_audio_default vendor_audio_parent_dir:dir search;
+allow { vendor_nvram_daemon vendor_ccci_fsd } vendor_modem_parent_dir:dir search;
+allow vendor_ccci_fsd vendor_modem_parent_dir:dir getattr;
+allow vendor_ccci_fsd vendor_protect_mountpoint:dir search;
+allow { vendor_ccci_fsd vendor_ccci_mdinit } block_device:dir search;
+allow mediacodec graphics_device:dir search;

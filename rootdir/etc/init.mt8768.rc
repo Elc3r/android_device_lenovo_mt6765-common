@@ -9,6 +9,7 @@ import /vendor/etc/init/hw/init.sensor_1_0.rc
 import /vendor/etc/init/hw/init.modem.rc
 
 on early-init
+    export LINEAGE_PROPERTY_AUDIT 1
     write /proc/bootprof "INIT:early-init"
     # boot perf. tune
     write /proc/perfmgr/boost_ctrl/cpu_ctrl/boot_freq "0 0 5 0"
@@ -17,6 +18,11 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
+    mkdir /mnt/vendor 0755 root root
+    restorecon /mnt/vendor
+    mkdir /mnt/vendor/persist 0771 system system
+    restorecon /mnt/vendor/persist
+    mkdir /dev/radio 0770 radio radio
     # create io boost group
     mkdir /dev/stune/io
     chown root system /dev/stune/io
@@ -49,7 +55,6 @@ on init
     # Create CIP mount point
     mkdir /custom
 
-    mkdir /mnt/cd-rom 0000 system system
 
     # change lk_env permission
     chown root system /proc/lk_env
@@ -79,6 +84,7 @@ on init
     symlink /dev/block/platform/bootdevice /dev/block/bootdevice
 
 on late-init
+    stop console
     write /proc/bootprof "INIT:late-init"
 
     # enable rcu_expedited
@@ -137,9 +143,6 @@ on fs
     mount_all /vendor/etc/fstab.mt6765
     write /sys/kernel/debug/tracing/trace_marker "E"
     write /proc/bootprof "INIT:Mount_END"
-
-on fs
-   mount iso9660 loop@/vendor/etc/iAmCdRom.iso /mnt/cd-rom ro
 
 on post-fs
     write /proc/bootprof "INIT:post-fs"
@@ -250,6 +253,13 @@ on post-fs-data
 
     # Set SELinux security contexts on upgrade or policy update.
     restorecon_recursive /mnt/vendor/nvdata
+    restorecon /mnt/vendor/protect_f/md /mnt/vendor/protect_s/md
+    restorecon /mnt/vendor/protect_f/md/MT00A001 /mnt/vendor/protect_f/md/MT00B001 /mnt/vendor/protect_f/md/NA77_005 /mnt/vendor/protect_f/md/ST33_004 /mnt/vendor/protect_s/md/ST33_004
+    restorecon /mnt/vendor/protect_f/md/MTFW_000
+    restorecon /mnt/vendor/protect_s/md/MTFW_000
+    restorecon /mnt/vendor/protect_s/md/NA77_005
+    restorecon /mnt/vendor/protect_f/md/LD40_001
+    restorecon /mnt/vendor/protect_s/md/LD40_001
 
     # Give system access to rfkill device node
     chmod 0660 /dev/rfkill
@@ -622,6 +632,9 @@ on post-fs-data
 
 	# Thermal
 	mkdir /data/vendor/.tp/ 0775 system system
+	restorecon_recursive /data/vendor/.tp
+	restorecon_recursive /data/vendor/powerhal
+	restorecon_recursive /data/vendor/ccci_cfg
 
     # Power manager
     write /sys/power/pm_async 0
@@ -629,9 +642,6 @@ on post-fs-data
     # AGO
     write /proc/sys/vm/page-cluster 0
     swapon_all /vendor/etc/fstab.mt6765
-    write /dev/memcg/memory.swappiness 150
-    write /dev/memcg/apps/memory.swappiness 150
-    write /dev/memcg/system/memory.swappiness 150
     write /proc/sys/vm/swappiness 150
 
 on post-fs-data && property:ro.crypto.type=block
@@ -643,9 +653,7 @@ on post-fs-data && property:ro.crypto.state=unencrypted
 on boot
     write /proc/bootprof "INIT:boot"
     setprop ro.vendor.build.fingerprint ${ro.boot.fingerprint}
-    setprop ro.system.build.fingerprint ${ro.boot.fingerprint}
     setprop ro.odm.build.fingerprint ${ro.boot.fingerprint}
-    setprop ro.bootimage.build.fingerprint ${ro.boot.fingerprint}
 
     write /proc/sys/vm/dirty_writeback_centisecs 300
     chmod 0660 /sys/power/autosleep

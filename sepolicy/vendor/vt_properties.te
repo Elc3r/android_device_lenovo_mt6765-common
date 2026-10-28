@@ -1,0 +1,33 @@
+vendor_restricted_prop(vendor_vt_capability_prop)
+get_prop(mtk_vt_vendor_config_reader, vendor_vt_capability_prop)
+set_prop(vendor_init, vendor_vt_capability_prop)
+neverallow { domain -init -vendor_init } vendor_vt_capability_prop:property_service set;
+neverallow appdomain vendor_vt_capability_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_vt_operator_config_prop)
+get_prop(mtk_vt_vendor_config_reader, vendor_vt_operator_config_prop)
+set_prop(vendor_init, vendor_vt_operator_config_prop)
+neverallow { domain -init -vendor_init } vendor_vt_operator_config_prop:property_service set;
+neverallow appdomain vendor_vt_operator_config_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_vt_camera_input_prop)
+get_prop(mtk_vt_vendor_config_reader, vendor_vt_camera_input_prop)
+set_prop(vendor_init, vendor_vt_camera_input_prop)
+neverallow { domain -init -vendor_init } vendor_vt_camera_input_prop:property_service set;
+neverallow appdomain vendor_vt_camera_input_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_vt_controls_prop)
+get_prop(mtk_vt_vendor_config_reader, vendor_vt_controls_prop)
+set_prop(vendor_init, vendor_vt_controls_prop)
+neverallow { domain -init -vendor_init } vendor_vt_controls_prop:property_service set;
+neverallow appdomain vendor_vt_controls_prop:file no_rw_file_perms;
+
+get_prop(rild, vendor_vt_operator_config_prop)
+get_prop(mediacodec, vendor_vt_camera_input_prop)
+
+vendor_restricted_prop(vendor_vt_video_support_prop)
+get_prop(mtk_vt_vendor_config_reader, vendor_vt_video_support_prop)
+get_prop(rild, vendor_vt_video_support_prop)
+set_prop(vendor_init, vendor_vt_video_support_prop)
+neverallow { domain -init -vendor_init } vendor_vt_video_support_prop:property_service set;
+neverallow appdomain vendor_vt_video_support_prop:file no_rw_file_perms;

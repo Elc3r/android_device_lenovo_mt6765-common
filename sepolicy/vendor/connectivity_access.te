@@ -1,0 +1,36 @@
+allow hal_bluetooth_default vendor_stp_bt_device:chr_file { open read write };
+allow hal_wifi_default vendor_wmt_wifi_device:chr_file { open write };
+allow vendor_wlan_assistant vendor_wmt_wifi_device:chr_file { getattr open read write };
+allow vendor_wmt_launcher vendor_stpwmt_device:chr_file { open read write ioctl };
+allowxperm vendor_wmt_launcher vendor_stpwmt_device:chr_file ioctl { 0xa005 0xa007 0xa00c 0xa00d 0xa00e 0xa00f 0xa01f };
+allow vendor_wmt_loader vendor_wmt_detect_device:chr_file { open read write ioctl };
+allowxperm vendor_wmt_loader vendor_wmt_detect_device:chr_file ioctl { 0x7701 0x7704 0x7705 };
+allow vendor_wmt_loader vendor_proc_wmt_debug:file setattr;
+
+allow vendor_nvram_daemon sensors_device:chr_file { open read ioctl };
+allowxperm vendor_nvram_daemon sensors_device:chr_file ioctl { 0x8506 };
+allow vendor_nvram_daemon vendor_sensor_alsps_device:chr_file { open read write ioctl };
+allowxperm vendor_nvram_daemon vendor_sensor_alsps_device:chr_file ioctl { 0x8411 };
+allow vendor_nvram_daemon vendor_adc_calibration_device:chr_file { open read write ioctl };
+allowxperm vendor_nvram_daemon vendor_adc_calibration_device:chr_file ioctl { 0x6b01 0x6b02 0x6b03 };
+allow vendor_nvram_daemon vendor_gyroscope_device:chr_file { open read ioctl };
+allowxperm vendor_nvram_daemon vendor_gyroscope_device:chr_file ioctl { 0x8604 };
+
+allow vendor_bip vendor_ccci_bip_device:chr_file { open read write };
+allow vendor_bip self:netlink_route_socket { create bind read write nlmsg_read };
+allow vendor_volte_imsm vendor_ccci_imsm_device:chr_file { open read write };
+allow vendor_volte_imsm self:netlink_generic_socket { create bind setopt read write };
+allow vendor_volte_imsm self:udp_socket { create ioctl };
+allowxperm vendor_volte_imsm self:udp_socket ioctl { 0x8933 };
+
+allow vendor_mtk_agpsd vendor_ttyc2_device:chr_file { open read write ioctl };
+allowxperm vendor_mtk_agpsd vendor_ttyc2_device:chr_file ioctl { 0x5401 };
+allow vendor_mtk_agpsd self:udp_socket { create write };
+allow vendor_mtk_agpsd vendor_lbs:unix_dgram_socket sendto;
+allow rild vendor_mtk_agpsd:unix_stream_socket connectto;
+
+hwbinder_use(vendor_netdagent)
+get_prop(vendor_netdagent, hwservicemanager_prop)
+create_pty(vendor_netdagent)
+allow netutils_wrapper vendor_netdagent:fd use;
+allow netutils_wrapper vendor_netdagent_devpts:chr_file { read write };

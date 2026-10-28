@@ -1,0 +1,22 @@
+type vendor_muxreport, domain;
+type vendor_muxreport_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_muxreport)
+
+type vendor_epdg_wod, domain;
+type vendor_epdg_wod_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_epdg_wod)
+
+vendor_restricted_prop(vendor_modem_recovery_case_prop)
+vendor_restricted_prop(vendor_modem_recovery_notify_prop)
+
+set_prop({ rild vendor_bip vendor_volte_imsm vendor_gsm0710muxd vendor_ccci_mdinit vendor_muxreport }, vendor_modem_recovery_case_prop)
+get_prop(vendor_epdg_wod, vendor_modem_recovery_case_prop)
+set_prop({ rild vendor_bip vendor_volte_imsm vendor_gsm0710muxd }, vendor_modem_recovery_notify_prop)
+
+neverallow { domain -init -vendor_init -rild -vendor_bip -vendor_volte_imsm -vendor_gsm0710muxd -vendor_ccci_mdinit -vendor_muxreport } vendor_modem_recovery_case_prop:property_service set;
+neverallow { domain -init -vendor_init -rild -vendor_bip -vendor_volte_imsm -vendor_gsm0710muxd } vendor_modem_recovery_notify_prop:property_service set;
+neverallow appdomain { vendor_modem_recovery_case_prop vendor_modem_recovery_notify_prop }:file no_rw_file_perms;
+
+get_prop(vendor_muxreport, vendor_modem_runtime_config_prop)
+set_prop(vendor_muxreport, vendor_ril_mux_report_prop)
+allow vendor_muxreport vendor_sysfs_ccci_version:file { getattr open read };

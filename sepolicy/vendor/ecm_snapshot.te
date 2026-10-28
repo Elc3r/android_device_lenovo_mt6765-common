@@ -1,0 +1,2 @@
+typeattribute rild mt6765_ecm_snapshot_reader;
+get_prop(rild, mt6765_ecm_snapshot_prop)

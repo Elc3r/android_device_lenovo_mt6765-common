@@ -1,0 +1,5 @@
+# init transports the existing canonical snapshot, never inventing radio state.
+set_prop(init, mt6765_ecm_snapshot_prop)
+neverallow { domain -init } mt6765_ecm_snapshot_prop:property_service set;
+neverallow { domain -init -dumpstate -mt6765_ecm_snapshot_reader } mt6765_ecm_snapshot_prop:file no_rw_file_perms;
+neverallow appdomain mt6765_ecm_snapshot_prop:file no_rw_file_perms;

@@ -1,0 +1,49 @@
+hal_client_domain(hal_camera_default, hal_allocator)
+vndbinder_use(hal_camera_default)
+vndbinder_use(hal_gnss_default)
+vndbinder_use(rild)
+
+allow hal_camera_default vendor_camera_isp_device:chr_file { open read write ioctl };
+allowxperm hal_camera_default vendor_camera_isp_device:chr_file ioctl { 0x695f 0x6b00 0x6b03 0x6b04 0x6b06 0x6b09 0x6b0f 0x6b12 0x6b13 0x6b14 0x6b17 0x6b18 0x6b19 0x6b1b 0x6b1d 0x6b20 0x6b21 0x6b22 0x6b23 0x6b27 0x6b28 0x6b29 0x6b2a };
+allow hal_camera_default vendor_camera_hw_device:chr_file { open read write ioctl };
+allowxperm hal_camera_default vendor_camera_hw_device:chr_file ioctl { 0x690f 0x6914 0x693c 0x6941 0x695f 0x6b21 };
+allow hal_camera_default gpu_device:chr_file { open read write ioctl };
+allowxperm hal_camera_default gpu_device:chr_file ioctl { 0x5700 0x5701 0x5704 0x5705 0x6400 0x6440 };
+allow hal_camera_default vendor_camera_flash_device:chr_file { open read write ioctl };
+allowxperm hal_camera_default vendor_camera_flash_device:chr_file ioctl { 0x531e 0x536e 0x5373 0x53a6 0x53af 0x53b4 0x53d7 0x53e1 0x53fa 0x53fb };
+allow hal_camera_default self:global_capability_class_set sys_nice;
+allow { hal_camera_default mediacodec } vendor_mtk_cmdq_device:chr_file { open read ioctl };
+allowxperm { hal_camera_default mediacodec } vendor_mtk_cmdq_device:chr_file ioctl { 0x780b };
+allowxperm hal_camera_default vendor_mtk_cmdq_device:chr_file ioctl { 0x7814 0x7815 };
+allow hal_memtrack_default vendor_debugfs_ion_summary:file { getattr open read };
+allow mediacodec graphics_device:chr_file { open read ioctl };
+allowxperm mediacodec graphics_device:chr_file ioctl { 0x4600 0x4fc9 0x4fd0 };
+
+allowxperm bootanim vendor_proc_ged:file ioctl { 0x6700 0x6709 };
+allowxperm mediacodec vendor_proc_ged:file ioctl { 0x670e };
+allowxperm surfaceflinger vendor_proc_ged:file ioctl { 0x6700 0x6709 };
+allowxperm system_server vendor_proc_ged:file ioctl { 0x6700 0x6703 0x6704 0x6705 0x6709 0x670d 0x6766 };
+
+allow cameraserver vendor_proc_ged:file { open read ioctl };
+allowxperm cameraserver vendor_proc_ged:file ioctl { 0x6765 };
+allow cameraserver gpu_device:chr_file { open read write ioctl };
+allowxperm cameraserver gpu_device:chr_file ioctl { 0x6400 0x6440 };
+
+allow hal_camera_default vendor_camera_focus_device:chr_file { open read write ioctl };
+allowxperm hal_camera_default vendor_camera_focus_device:chr_file ioctl { 0x4101 0x4105 0x410a };
+allow hal_camera_default vendor_camera_smi_device:chr_file { open read ioctl };
+allowxperm hal_camera_default vendor_camera_smi_device:chr_file ioctl { 0x4f18 0x4f1c 0x4f1d 0x4f58 0x4f59 };
+allow hal_camera_default vendor_camera_ccu_device:chr_file { open read write ioctl };
+allowxperm hal_camera_default vendor_camera_ccu_device:chr_file ioctl { 0x6300 0x6301 0x6302 0x6309 0x630b 0x6313 0x6314 0x6315 0x6316 0x6317 0x6318 0x6319 };
+allow hal_camera_default vendor_proc_camera_thermal:file { open read write };
+allow hal_camera_default vendor_sysfs_camera_memory:file { open write };
+allow hal_camera_default vendor_sysfs_boot_mode:file { open read };
+
+allow hal_camera_default sensor_service_server:binder { call transfer };
+allow sensor_service_server hal_camera_default:binder { call transfer };
+
+allow hal_camera_default vendor_camera_calibration_device:chr_file { open read write ioctl };
+allowxperm hal_camera_default vendor_camera_calibration_device:chr_file ioctl { 0x6905 };
+neverallowxperm hal_camera_default vendor_camera_calibration_device:chr_file ioctl { 0x6900 };
+allow hal_camera_default vendor_camera_fdvt_device:chr_file { open read write ioctl };
+allowxperm hal_camera_default vendor_camera_fdvt_device:chr_file ioctl { 0x4e00 0x4e01 0x4e02 0x4e03 0x4e04 };

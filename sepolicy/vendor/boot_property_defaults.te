@@ -1,0 +1,9 @@
+# LoadProperties checks vendor/build.prop entries as vendor_init before they
+# enter the defaults map. These existing finite config types need that publisher.
+# Runtime publishers (RIL / WMT) and all existing readers remain unchanged.
+set_prop(vendor_init, vendor_codec_config_prop)
+set_prop(vendor_init, vendor_modem_runtime_config_prop)
+set_prop(vendor_init, vendor_modem_single_bin_prop)
+set_prop(vendor_init, vendor_radio_multisim_prop)
+set_prop(vendor_init, vendor_connsys_patch_version_prop)
+set_prop(vendor_init, vendor_connsys_driver_status_prop)

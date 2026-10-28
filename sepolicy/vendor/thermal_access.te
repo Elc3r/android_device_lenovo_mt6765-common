@@ -1,0 +1,22 @@
+allow vendor_thermal vendor_proc_thermal_pid:file { open read write };
+allow vendor_thermal vendor_proc_thermal_modem:file { open read write };
+allow { vendor_thermal vendor_thermalloadalgod } vendor_proc_thermal_status:file { getattr open read };
+unix_socket_connect(vendor_thermal, vendor_rild_oem, rild)
+
+allow vendor_thermal_manager vendor_proc_thermal_config:file { open read write };
+allow vendor_thermal_manager vendor_proc_thermal_clabcct:file { open read write };
+allow vendor_thermalloadalgod vendor_proc_thermal_clabcct:file { getattr open read };
+allow vendor_thermalloadalgod vendor_thermal_settings_file:dir search;
+allow vendor_thermalloadalgod vendor_thermal_settings_file:file { getattr open read };
+allow vendor_thermal_manager vendor_thermal_settings_file:dir { search write add_name };
+allow vendor_thermal_manager vendor_thermal_settings_file:file { create getattr open read write setattr lock };
+allow vendor_thermal_manager self:global_capability_class_set { chown fowner };
+allow vendor_thermal_manager vendor_thermalloadalgod:unix_stream_socket connectto;
+
+allow vendor_fuelgauged vendor_fg_state_file:file { getattr open read write };
+allow vendor_fuelgauged vendor_fg_calibration_file:file { getattr open read };
+allow vendor_fuelgauged_nvram vendor_fg_calibration_file:file { open write };
+allow vendor_fuelgauged_nvram vendor_fg_nvram_file:file { open read };
+
+allow vendor_fuelgauged self:netlink_socket { create bind read write };
+allow vendor_thermalloadalgod self:netlink_socket { create bind read write };

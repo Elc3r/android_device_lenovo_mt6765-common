@@ -1,0 +1,50 @@
+[
+  {
+    "path": "vendor/lenovo/mt6765-common/proprietary/vendor/bin/nvram_daemon",
+    "sha256": "9d61663f1310a11e1eaf4da28a592c0d1be6c5b6a6776940a506ad984c3d1fa3",
+    "stock_sha256": "9d61663f1310a11e1eaf4da28a592c0d1be6c5b6a6776940a506ad984c3d1fa3",
+    "equal": true
+  },
+  {
+    "path": "vendor/lenovo/mt6765-common/proprietary/vendor/lib/libnvram.so",
+    "sha256": "3c023bd7a4ecc18007d499ef718ac9b54728d1975c32c6ff821bb8a9ed5b6163",
+    "stock_sha256": "3c023bd7a4ecc18007d499ef718ac9b54728d1975c32c6ff821bb8a9ed5b6163",
+    "equal": true
+  },
+  {
+    "path": "vendor/lenovo/mt6765-common/proprietary/vendor/lib/libcustom_nvram.so",
+    "sha256": "1a7c6f80624a724b99ab9921ab5fdc4e2eef51bca9a8cd83c7fdc18083b9aaa0",
+    "stock_sha256": "1a7c6f80624a724b99ab9921ab5fdc4e2eef51bca9a8cd83c7fdc18083b9aaa0",
+    "equal": true
+  },
+  {
+    "path": "vendor/lenovo/mt6765-common/proprietary/vendor/lib/libfile_op.so",
+    "sha256": "eb9d9d2af60f081bb85faf9bc087004fcf606e48c2b7cebd39e5f5720bf59da4",
+    "stock_sha256": "eb9d9d2af60f081bb85faf9bc087004fcf606e48c2b7cebd39e5f5720bf59da4",
+    "equal": true
+  },
+  {
+    "path": "vendor/lenovo/mt6765-common/proprietary/vendor/lib/libnvram_platform.so",
+    "sha256": "2578c6b52e2e2309c5374348ef6bffe43439207c342cd4824f71a2d4076d9b60",
+    "stock_sha256": "2578c6b52e2e2309c5374348ef6bffe43439207c342cd4824f71a2d4076d9b60",
+    "equal": true
+  },
+  {
+    "path": "vendor/lenovo/mt6765-common/proprietary/vendor/lib/libnvram_sec.so",
+    "sha256": "da9fab54bb6b7590e12095c84be8116d546e26514da88e5e5ef0e6b1ae84569d",
+    "stock_sha256": "da9fab54bb6b7590e12095c84be8116d546e26514da88e5e5ef0e6b1ae84569d",
+    "equal": true
+  },
+  {
+    "path": "vendor/lenovo/mt6765-common/proprietary/vendor/lib/libnvram_daemon_callback.so",
+    "sha256": "bb84475474cfec4938f301571bf8d6974b6e27f87b8c5e62e5935a1d9bfaa1d5",
+    "stock_sha256": "bb84475474cfec4938f301571bf8d6974b6e27f87b8c5e62e5935a1d9bfaa1d5",
+    "equal": true
+  },
+  {
+    "path": "vendor/lenovo/mt6765-common/proprietary/vendor/lib/libhwm.so",
+    "sha256": "a4d228f5501c90b81d09f7a6999ca4e9a61c9e7f6c7299556301b24eb3accda3",
+    "stock_sha256": "a4d228f5501c90b81d09f7a6999ca4e9a61c9e7f6c7299556301b24eb3accda3",
+    "equal": true
+  }
+]

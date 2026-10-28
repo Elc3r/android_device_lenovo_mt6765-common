@@ -1,0 +1,10 @@
+vendor_restricted_prop(vendor_pq_pipeline_settings_prop)
+vendor_restricted_prop(vendor_ims_emergency_status_prop)
+system_restricted_prop(vendor_radio_service_status_prop)
+
+set_prop(vendor_pq, vendor_pq_pipeline_settings_prop)
+set_prop(rild, vendor_ims_emergency_status_prop)
+get_prop(vendor_ccci_mdinit, vendor_radio_service_status_prop)
+neverallow { domain -init } vendor_radio_service_status_prop:property_service set;
+
+allow vendor_ccci_fsd vendor_modem_protect_dir:dir { getattr search };

@@ -1,0 +1,26 @@
+vendor_restricted_prop(vendor_radio_dualactive_prop)
+vendor_restricted_prop(vendor_radio_capability_slot_prop)
+vendor_restricted_prop(vendor_radio_emci_support_prop)
+vendor_restricted_prop(vendor_radio_simswitch_prop)
+vendor_restricted_prop(vendor_radio_sim_onoff_support_prop)
+
+set_prop(rild, vendor_radio_dualactive_prop)
+set_prop(rild, vendor_radio_capability_slot_prop)
+set_prop(rild, vendor_radio_emci_support_prop)
+set_prop(rild, vendor_radio_simswitch_prop)
+set_prop(rild, vendor_radio_sim_onoff_support_prop)
+
+neverallow { domain -init -vendor_init -rild } vendor_radio_dualactive_prop:property_service set;
+neverallow appdomain vendor_radio_dualactive_prop:file no_rw_file_perms;
+
+neverallow { domain -init -vendor_init -rild } vendor_radio_capability_slot_prop:property_service set;
+neverallow appdomain vendor_radio_capability_slot_prop:file no_rw_file_perms;
+
+neverallow { domain -init -vendor_init -rild } vendor_radio_emci_support_prop:property_service set;
+neverallow appdomain vendor_radio_emci_support_prop:file no_rw_file_perms;
+
+neverallow { domain -init -vendor_init -rild } vendor_radio_simswitch_prop:property_service set;
+neverallow appdomain vendor_radio_simswitch_prop:file no_rw_file_perms;
+
+neverallow { domain -init -vendor_init -rild } vendor_radio_sim_onoff_support_prop:property_service set;
+neverallow appdomain vendor_radio_sim_onoff_support_prop:file no_rw_file_perms;

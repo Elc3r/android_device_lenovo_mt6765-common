@@ -1,2 +1,52 @@
 soong_namespace {
 }
+
+python_binary_host {
+    name: "lenovo_modem_logger_migration",
+    main: "tools/prepare_modem_logger_migration.py",
+    srcs: ["tools/prepare_modem_logger_migration.py"],
+    version: {
+        py2: { enabled: false },
+        py3: { enabled: true, embedded_launcher: true },
+    },
+}
+
+python_binary_host {
+    name: "lenovo_proinfo_probe_migration",
+    main: "tools/prepare_proinfo_probe_migration.py",
+    srcs: ["tools/prepare_proinfo_probe_migration.py"],
+    version: {
+        py2: { enabled: false },
+        py3: { enabled: true, embedded_launcher: true },
+    },
+}
+
+python_binary_host {
+    name: "lenovo_media_property_migration",
+    main: "tools/prepare_media_property_migration.py",
+    srcs: ["tools/prepare_media_property_migration.py"],
+    version: {
+        py2: {
+            enabled: false,
+        },
+        py3: {
+            enabled: true,
+            embedded_launcher: true,
+        },
+    },
+}
+
+python_binary_host {
+    name: "lenovo_codec_log_migration",
+    main: "tools/prepare_codec_log_migration.py",
+    srcs: ["tools/prepare_codec_log_migration.py"],
+    version: {
+        py2: {
+            enabled: false,
+        },
+        py3: {
+            enabled: true,
+            embedded_launcher: true,
+        },
+    },
+}

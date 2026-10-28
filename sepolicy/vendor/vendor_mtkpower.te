@@ -1,0 +1,14 @@
+hal_attribute(vendor_mtkpower)
+
+type vendor_mtkpower, domain;
+type vendor_mtkpower_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_mtkpower)
+hal_server_domain(vendor_mtkpower, hal_vendor_mtkpower)
+
+hal_attribute_hwservice(hal_vendor_mtkpower, vendor_mtkpower_hwservice)
+hal_client_domain(hal_audio_default, hal_vendor_mtkpower)
+hal_client_domain(mediacodec, hal_vendor_mtkpower)
+hal_client_domain(system_server, hal_vendor_mtkpower)
+hal_client_domain(hal_camera_default, hal_vendor_mtkpower)
+hal_client_domain(surfaceflinger, hal_vendor_mtkpower)
+binder_call(hal_vendor_mtkpower_client, hal_vendor_mtkpower_server)

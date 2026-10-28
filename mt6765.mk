@@ -7,6 +7,10 @@
 # Enable updating of APEXes
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
+# post_process_props supplies a USB default even when vendor.prop omits it.
+# Keep this platform-owned default exclusively in system.prop.
+PRODUCT_VENDOR_PROPERTY_BLACKLIST += persist.sys.usb.config
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
@@ -143,10 +147,11 @@ PRODUCT_COPY_FILES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@4.0-service \
     android.hardware.keymaster@4.0.vendor
 
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keymaster/android.hardware.keymaster@4.0-service.beanpod:$(TARGET_COPY_OUT_VENDOR)/bin/hw/android.hardware.keymaster@4.0-service \
+    $(LOCAL_PATH)/keymaster/android.hardware.keymaster@4.0-service.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/android.hardware.keymaster@4.0-service.rc \
     prebuilts/vndk/v29/arm/arch-arm-armv7-a-neon/shared/vndk-core/libkeymaster_messages.so:$(TARGET_COPY_OUT_VENDOR)/lib/libkeymaster_messages.so \
     prebuilts/vndk/v29/arm/arch-arm-armv7-a-neon/shared/vndk-core/libkeymaster_portable.so:$(TARGET_COPY_OUT_VENDOR)/lib/libkeymaster_portable.so \
     prebuilts/vndk/v29/arm/arch-arm-armv7-a-neon/shared/vndk-core/libpuresoftkeymasterdevice.so:$(TARGET_COPY_OUT_VENDOR)/lib/libpuresoftkeymasterdevice.so \
@@ -342,6 +347,42 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf
+
+ifeq ($(TARGET_PRODUCT),lineage_achilles6_row_data)
+# Select only together with the fixed platform publisher/readiness gate.
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/lenovo-ecm-consumer-migration/$(TARGET_PRODUCT)/arm64/libmtk-ril.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmtk-ril.so
+# Keep both optional setting readers and property-gated exports coordinated.
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/lenovo-camera-config-migration/$(TARGET_PRODUCT)/arm64/libmtkcam.logicalmodule.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libmtkcam.logicalmodule.so \
+    $(OUT_DIR)/lenovo-camera-config-migration/$(TARGET_PRODUCT)/arm64/libfeature.stereo.provider.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libfeature.stereo.provider.so
+# Keep stereo debug/depth marker checks and enabled dumps out of user storage.
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/lenovo-camera-storage-migration/$(TARGET_PRODUCT)/arm64/libstereoinfoaccessor_vsdof.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libstereoinfoaccessor_vsdof.so
+# This worker only opened/closed product metadata and discarded its result.
+# Retire that probe without granting access to the protected proinfo partition.
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/lenovo-proinfo-probe-migration/$(TARGET_PRODUCT)/nvram_daemon:$(TARGET_COPY_OUT_VENDOR)/bin/nvram_daemon
+# Retire only emdlogger1 selection in both modem dispatchers; shared helpers,
+# mux/RIL/fsd and persistent SIM-mode handling retain their original bytes.
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/lenovo-modem-logger-migration/$(TARGET_PRODUCT)/ccci_mdinit:$(TARGET_COPY_OUT_VENDOR)/bin/ccci_mdinit
+# Stop the ARM64 graphics initializer from probing a user-editable config.
+# The proprietary copy pair is ignored by the first-destination filter below.
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/lenovo-graphics-storage-migration/$(TARGET_PRODUCT)/arm64/libGLES_meow.so:$(TARGET_COPY_OUT_VENDOR)/lib64/egl/libGLES_meow.so
+# Retire only the optional boot status probe; preserve the hardware Keymaster
+# service and all stored keys. First destination mapping wins over vendor.mk.
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/keybox-status/microtrust.bp_kmsetkey_ca.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/microtrust.bp_kmsetkey_ca.rc
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/lenovo-codec-migration/$(TARGET_PRODUCT)/arm/libvcodec_utility.so:$(TARGET_COPY_OUT_VENDOR)/lib/libvcodec_utility.so \
+    $(OUT_DIR)/lenovo-codec-migration/$(TARGET_PRODUCT)/arm64/libvcodec_utility.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libvcodec_utility.so
+PRODUCT_COPY_FILES += \
+    $(OUT_DIR)/lenovo-media-property-migration/$(TARGET_PRODUCT)/camera-dump/arm64/libcam.iopipe.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libcam.iopipe.so \
+    $(OUT_DIR)/lenovo-media-property-migration/$(TARGET_PRODUCT)/omx-core/arm/libMtkOmxCore.so:$(TARGET_COPY_OUT_VENDOR)/lib/libMtkOmxCore.so \
+    $(OUT_DIR)/lenovo-media-property-migration/$(TARGET_PRODUCT)/omx-core/arm64/libMtkOmxCore.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libMtkOmxCore.so
+endif
 
 # Inherit the proprietary files
 $(call inherit-product, vendor/lenovo/mt6765-common/mt6765-common-vendor.mk)

@@ -1,0 +1,84 @@
+vendor_restricted_prop(vendor_ril_simswitch_features_prop)
+set_prop(rild, vendor_ril_simswitch_features_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_simswitch_features_prop:property_service set;
+neverallow appdomain vendor_ril_simswitch_features_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_mims_feature_prop)
+set_prop(rild, vendor_ril_mims_feature_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_mims_feature_prop:property_service set;
+neverallow appdomain vendor_ril_mims_feature_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_gcf_mode_prop)
+set_prop(rild, vendor_ril_gcf_mode_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_gcf_mode_prop:property_service set;
+neverallow appdomain vendor_ril_gcf_mode_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_modem_version_prop)
+set_prop(rild, vendor_ril_modem_version_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_modem_version_prop:property_service set;
+neverallow appdomain vendor_ril_modem_version_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_modem_serial_prop)
+set_prop(rild, vendor_ril_modem_serial_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_modem_serial_prop:property_service set;
+neverallow appdomain vendor_ril_modem_serial_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_network_state_prop)
+set_prop(rild, vendor_ril_network_state_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_network_state_prop:property_service set;
+neverallow appdomain vendor_ril_network_state_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_apc_feature_prop)
+set_prop(rild, vendor_ril_apc_feature_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_apc_feature_prop:property_service set;
+neverallow appdomain vendor_ril_apc_feature_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_boot_state_prop)
+set_prop(rild, vendor_ril_boot_state_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_boot_state_prop:property_service set;
+neverallow appdomain vendor_ril_boot_state_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_card_type_prop)
+set_prop(rild, vendor_ril_card_type_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_card_type_prop:property_service set;
+neverallow appdomain vendor_ril_card_type_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_sim_state_prop)
+set_prop(rild, vendor_ril_sim_state_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_sim_state_prop:property_service set;
+neverallow appdomain vendor_ril_sim_state_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_subscriber_identity_prop)
+set_prop(rild, vendor_ril_subscriber_identity_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_subscriber_identity_prop:property_service set;
+neverallow appdomain vendor_ril_subscriber_identity_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_sim_card_identity_prop)
+set_prop(rild, vendor_ril_sim_card_identity_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_sim_card_identity_prop:property_service set;
+neverallow appdomain vendor_ril_sim_card_identity_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_emergency_state_prop)
+set_prop(rild, vendor_ril_emergency_state_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_emergency_state_prop:property_service set;
+neverallow appdomain vendor_ril_emergency_state_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_radio_access_family_prop)
+set_prop(rild, vendor_ril_radio_access_family_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_radio_access_family_prop:property_service set;
+neverallow appdomain vendor_ril_radio_access_family_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_pin_retry_prop)
+set_prop(rild, vendor_ril_pin_retry_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_pin_retry_prop:property_service set;
+neverallow appdomain vendor_ril_pin_retry_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_operator_numeric_prop)
+set_prop(rild, vendor_ril_operator_numeric_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_operator_numeric_prop:property_service set;
+neverallow appdomain vendor_ril_operator_numeric_prop:file no_rw_file_perms;
+
+vendor_restricted_prop(vendor_ril_data_selection_prop)
+set_prop(rild, vendor_ril_data_selection_prop)
+neverallow { domain -init -vendor_init -rild } vendor_ril_data_selection_prop:property_service set;
+neverallow appdomain vendor_ril_data_selection_prop:file no_rw_file_perms;

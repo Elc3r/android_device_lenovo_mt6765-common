@@ -1,0 +1,6 @@
+type vendor_para_block_device, dev_type;
+
+allow vendor_ccci_mdinit vendor_para_block_device:blk_file { open read };
+
+neverallow { domain -init -recovery -vendor_ccci_mdinit } vendor_para_block_device:blk_file { open read write append map ioctl };
+neverallow vendor_ccci_mdinit vendor_para_block_device:blk_file { write append map ioctl };

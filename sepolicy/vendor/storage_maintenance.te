@@ -1,0 +1,30 @@
+# Traverse the existing /mnt/vendor parent to reach the trim-only mount roots.
+allow vold vendor_mount_parent:dir search;
+
+allow vold {
+    vendor_protect_mountpoint
+    vendor_nvdata_mountpoint
+    vendor_nvcfg_mountpoint
+    vendor_persist_mountpoint
+}:dir { open read ioctl };
+
+neverallow vold {
+    vendor_protect_mountpoint
+    vendor_nvdata_mountpoint
+    vendor_nvcfg_mountpoint
+    vendor_persist_mountpoint
+}:dir { create write add_name remove_name reparent rmdir setattr relabelfrom relabelto mounton };
+
+neverallow vold {
+    vendor_protect_mountpoint
+    vendor_nvdata_mountpoint
+    vendor_nvcfg_mountpoint
+    vendor_persist_mountpoint
+}:file no_rw_file_perms;
+
+neverallowxperm vold {
+    vendor_protect_mountpoint
+    vendor_nvdata_mountpoint
+    vendor_nvcfg_mountpoint
+    vendor_persist_mountpoint
+}:dir ioctl ~{ FITRIM FIOCLEX FIONCLEX };

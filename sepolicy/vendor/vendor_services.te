@@ -1,0 +1,103 @@
+type vendor_volte_md_status, domain;
+type vendor_volte_md_status_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_volte_md_status)
+
+type vendor_wmt_launcher, domain;
+type vendor_wmt_launcher_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_wmt_launcher)
+
+hal_attribute(lbs)
+
+type vendor_lbs, domain;
+type vendor_lbs_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_lbs)
+hal_server_domain(vendor_lbs, hal_lbs)
+hal_attribute_hwservice(hal_lbs, vendor_lbs_hwservice)
+
+hal_attribute(mtk_gpu)
+
+type vendor_mtk_gpu, domain;
+type vendor_mtk_gpu_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_mtk_gpu)
+hal_server_domain(vendor_mtk_gpu, hal_mtk_gpu)
+hal_attribute_hwservice(hal_mtk_gpu, vendor_mtk_gpu_hwservice)
+
+hal_attribute(keyinstall)
+
+type vendor_keyinstall, domain;
+type vendor_keyinstall_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_keyinstall)
+hal_server_domain(vendor_keyinstall, hal_keyinstall)
+hal_attribute_hwservice(hal_keyinstall, vendor_keyinstall_hwservice)
+
+hal_attribute(nvram)
+
+type vendor_nvram, domain;
+type vendor_nvram_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_nvram)
+hal_server_domain(vendor_nvram, hal_nvram)
+hal_attribute_hwservice(hal_nvram, vendor_nvram_hwservice)
+
+hal_attribute(teei_capi)
+
+type vendor_teei_capi, domain;
+type vendor_teei_capi_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_teei_capi)
+hal_server_domain(vendor_teei_capi, hal_teei_capi)
+hal_attribute_hwservice(hal_teei_capi, vendor_teei_capi_hwservice)
+
+type vendor_fuelgauged, domain;
+type vendor_fuelgauged_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_fuelgauged)
+
+type vendor_ccci_fsd, domain;
+type vendor_ccci_fsd_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_ccci_fsd)
+
+type vendor_ccci_mdinit, domain;
+type vendor_ccci_mdinit_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_ccci_mdinit)
+
+type vendor_ccci_rpcd, domain;
+type vendor_ccci_rpcd_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_ccci_rpcd)
+
+type vendor_thermal, domain;
+type vendor_thermal_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_thermal)
+
+type vendor_thermalloadalgod, domain;
+type vendor_thermalloadalgod_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_thermalloadalgod)
+
+type vendor_mtk_agpsd, domain;
+type vendor_mtk_agpsd_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_mtk_agpsd)
+
+type vendor_wlan_assistant, domain;
+type vendor_wlan_assistant_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_wlan_assistant)
+
+type vendor_netdagent, domain;
+type vendor_netdagent_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_netdagent)
+
+hal_attribute(dolby_dms)
+
+type vendor_dolby_dms, domain;
+type vendor_dolby_dms_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_dolby_dms)
+hal_server_domain(vendor_dolby_dms, hal_dolby_dms)
+hal_attribute_hwservice(hal_dolby_dms, vendor_dolby_dms_hwservice)
+
+type vendor_bip, domain;
+type vendor_bip_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_bip)
+
+type vendor_volte_imsm, domain;
+type vendor_volte_imsm_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_volte_imsm)
+
+type vendor_gsm0710muxd, domain;
+type vendor_gsm0710muxd_exec, exec_type, vendor_file_type, file_type;
+init_daemon_domain(vendor_gsm0710muxd)

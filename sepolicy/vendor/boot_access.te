@@ -1,0 +1,23 @@
+allow kernel vendor_mtk_firmware_file:file { open read };
+allow vendor_init vendor_kernel_modules:system module_load;
+allow vendor_init self:global_capability_class_set sys_module;
+allow vendor_init vendor_proc_bootprof:file write;
+allow vendor_ccci_mdinit vendor_proc_bootprof:file { open read write };
+allow init vendor_protect_mountpoint:dir mounton;
+allow fsck vendor_checked_fs_block_device:blk_file { getattr open read write ioctl };
+allow init vendor_nvdata_mountpoint:dir mounton;
+allow { domain -coredomain } vendor_nvdata_mountpoint:dir { getattr search };
+neverallow { coredomain -init -ueventd -vold -system_writes_mnt_vendor_violators } vendor_nvdata_mountpoint:dir *;
+allow init vendor_proc_last_kmsg:file { getattr setattr };
+allow system_server vendor_proc_last_kmsg:file { getattr open read };
+allow rild vendor_proc_reboot_reason:file { getattr open read };
+get_prop(vendor_init, vts_status_prop)
+allow init vendor_nvcfg_mountpoint:dir mounton;
+allow { domain -coredomain } vendor_nvcfg_mountpoint:dir { getattr search };
+neverallow { coredomain -init -ueventd -vold -system_writes_mnt_vendor_violators } vendor_nvcfg_mountpoint:dir *;
+allow init vendor_persist_mountpoint:dir mounton;
+allow { domain -coredomain } vendor_persist_mountpoint:dir { getattr search };
+neverallow { coredomain -init -ueventd -vold -system_writes_mnt_vendor_violators } vendor_persist_mountpoint:dir *;
+allow { domain -coredomain } vendor_mount_parent:dir { getattr search };
+neverallow { coredomain -init -ueventd -vold -system_writes_mnt_vendor_violators } vendor_mount_parent:dir *;
+allow vendor_init vendor_proc_init_sched_tuning:file { open write };

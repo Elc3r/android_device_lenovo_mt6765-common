@@ -1,0 +1,4 @@
+attribute mtk_vt_vendor_config_reader;
+expandattribute mtk_vt_vendor_config_reader false;
+attribute mt6765_ecm_snapshot_reader;
+expandattribute mt6765_ecm_snapshot_reader false;

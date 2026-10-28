@@ -1,0 +1,9 @@
+type vendor_proc_aed_control, fs_type, proc_type;
+type vendor_expdb_block_device, dev_type;
+
+allow vendor_init vendor_proc_aed_control:file { open write };
+allow vendor_init vendor_expdb_block_device:blk_file { open read write };
+
+neverallow { domain -init -vendor_init -recovery } vendor_proc_aed_control:file { write append };
+neverallow { domain -init -vendor_init -recovery } vendor_expdb_block_device:blk_file { open read write append map ioctl };
+neverallow vendor_init vendor_expdb_block_device:blk_file { append map ioctl };

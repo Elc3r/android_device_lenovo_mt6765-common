@@ -1,0 +1,4 @@
+# Vendor NSMemoryInfo opens /proc/meminfo through stdio for capture strategy
+# and next-capture admission. Permit only the observed normal file operations;
+# r_file_perms would additionally grant operations not established by the parser.
+allow hal_camera_default proc_meminfo:file { read getattr open };

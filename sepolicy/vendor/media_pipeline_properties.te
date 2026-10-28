@@ -1,0 +1,26 @@
+vendor_restricted_prop(vendor_camera_pipeline_prop)
+vendor_restricted_prop(vendor_codec_pipeline_prop)
+vendor_restricted_prop(vendor_codec_mem_log_prop)
+vendor_restricted_prop(vendor_media_color_mode_prop)
+vendor_restricted_prop(vendor_display_pipeline_prop)
+
+get_prop(hal_camera_default, vendor_camera_pipeline_prop)
+get_prop(mediacodec, vendor_codec_pipeline_prop)
+get_prop({ mediacodec hal_camera_default }, vendor_codec_mem_log_prop)
+get_prop({ mediacodec hal_graphics_composer_default hal_camera_default }, vendor_media_color_mode_prop)
+get_prop({ mediacodec hal_graphics_composer_default hal_camera_default }, vendor_display_pipeline_prop)
+set_prop(vendor_init, vendor_camera_pipeline_prop)
+set_prop(vendor_init, vendor_codec_pipeline_prop)
+set_prop(vendor_init, vendor_codec_mem_log_prop)
+set_prop(vendor_init, vendor_media_color_mode_prop)
+set_prop(vendor_init, vendor_display_pipeline_prop)
+
+neverallow appdomain {
+    vendor_camera_pipeline_prop
+    vendor_codec_pipeline_prop
+    vendor_codec_mem_log_prop
+    vendor_media_color_mode_prop
+    vendor_display_pipeline_prop
+}:file no_rw_file_perms;
+
+neverallow hal_graphics_composer_default vendor_codec_pipeline_prop:file no_rw_file_perms;

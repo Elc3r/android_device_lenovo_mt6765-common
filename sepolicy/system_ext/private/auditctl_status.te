@@ -1,0 +1,1 @@
+allow auditctl self:netlink_audit_socket nlmsg_read;

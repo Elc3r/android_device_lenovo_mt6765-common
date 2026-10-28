@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+/out/
+/tools/rom_update_plan.json
+/keymaster/android.hardware.keymaster@4.0-service.beanpod
+*.log

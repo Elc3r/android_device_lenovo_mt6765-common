@@ -1,0 +1,16 @@
+vendor.mediatek.hardware.mtkpower::IMtkPower u:object_r:vendor_mtkpower_hwservice:s0
+vendor.mediatek.hardware.mtkpower::IMtkPerf u:object_r:vendor_mtkpower_hwservice:s0
+vendor.mediatek.hardware.pq::IPictureQuality u:object_r:vendor_pq_hwservice:s0
+vendor.mediatek.hardware.lbs::ILbs u:object_r:vendor_lbs_hwservice:s0
+vendor.mediatek.hardware.gpu::IGraphicExt u:object_r:vendor_mtk_gpu_hwservice:s0
+vendor.mediatek.hardware.keyinstall::IKeyinstall u:object_r:vendor_keyinstall_hwservice:s0
+vendor.mediatek.hardware.nvram::INvram u:object_r:vendor_nvram_hwservice:s0
+vendor.microtrust.hardware.capi::IClientApiDevice u:object_r:vendor_teei_capi_hwservice:s0
+vendor.dolby.hardware.dms::IDms u:object_r:vendor_dolby_dms_hwservice:s0
+vendor.mediatek.hardware.power::IPower u:object_r:vendor_power_extension_hwservice:s0
+vendor.mediatek.hardware.camera.bgservice::IBGService u:object_r:vendor_camera_background_hwservice:s0
+vendor.mediatek.hardware.netdagent::INetdagent u:object_r:vendor_netdagent_hwservice:s0
+vendor.mediatek.hardware.mtkradioex::IMtkRadioEx u:object_r:vendor_radio_extension_hwservice:s0
+vendor.mediatek.hardware.wifi.supplicant::ISupplicant u:object_r:vendor_supplicant_extension_hwservice:s0
+vendor.mediatek.hardware.camera.postproc::IPostDevice u:object_r:vendor_camera_postproc_hwservice:s0
+vendor.mediatek.hardware.camera.atms::IATMs u:object_r:vendor_camera_atms_hwservice:s0

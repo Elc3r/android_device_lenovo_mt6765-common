@@ -1,0 +1,24 @@
+# Optional opt-in controls. Nothing creates these paths during normal boot.
+type vendor_camera_jps_root, file_type, data_file_type;
+type vendor_camera_jps_data, file_type, data_file_type;
+type vendor_camera_depth_marker, file_type, data_file_type;
+
+# F_OK probes only. Marker contents are not read by the library.
+allow hal_camera_default vendor_camera_depth_marker:{ file dir } getattr;
+allow hal_camera_default vendor_camera_jps_root:dir { getattr search open read write add_name };
+
+# Dump outputs remain private even when explicitly enabled by an administrator.
+type_transition hal_camera_default vendor_camera_jps_root:file vendor_camera_jps_data;
+type_transition hal_camera_default vendor_camera_jps_root:dir vendor_camera_jps_data;
+allow hal_camera_default vendor_camera_jps_data:dir { create getattr search open read write add_name };
+allow hal_camera_default vendor_camera_jps_data:file { create getattr open write };
+
+allow vendor_init vendor_camera_jps_root:dir create_dir_perms;
+allow vendor_init vendor_camera_depth_marker:dir create_dir_perms;
+allow vendor_init vendor_camera_depth_marker:file create_file_perms;
+
+# The camera can write dump contents, but cannot enable either feature itself.
+neverallow hal_camera_default vendor_camera_jps_root:dir { create rmdir rename };
+neverallow hal_camera_default vendor_camera_depth_marker:file { create write append setattr unlink link rename };
+neverallow hal_camera_default vendor_camera_depth_marker:dir { create write add_name remove_name rmdir rename setattr };
+neverallow appdomain { vendor_camera_jps_root vendor_camera_jps_data vendor_camera_depth_marker }:file no_rw_file_perms;

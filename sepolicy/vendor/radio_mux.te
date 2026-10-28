@@ -1,0 +1,20 @@
+create_pty(vendor_gsm0710muxd)
+create_pty(vendor_volte_imsm)
+
+allow { vendor_gsm0710muxd vendor_volte_imsm } radio_device:dir { getattr search write add_name };
+allow { vendor_gsm0710muxd vendor_volte_imsm } radio_device:lnk_file create;
+# setup_pty_interface unlinks stale names before symlink(); reset cleanup also
+# unlinks them. Permit symlink lifecycle, not removal of actual radio devices.
+allow vendor_gsm0710muxd radio_device:dir remove_name;
+allow vendor_gsm0710muxd radio_device:lnk_file unlink;
+allow vendor_gsm0710muxd vendor_gsm0710muxd_devpts:chr_file setattr;
+allow vendor_volte_imsm vendor_volte_imsm_devpts:chr_file setattr;
+allow vendor_gsm0710muxd self:global_capability_class_set { chown fowner setuid };
+allow vendor_gsm0710muxd vendor_ttyc0_device:chr_file { open read write };
+
+allow rild radio_device:dir search;
+allow rild radio_device:lnk_file { getattr read };
+allow rild { vendor_gsm0710muxd_devpts vendor_volte_imsm_devpts }:chr_file { open read write ioctl };
+allowxperm rild { vendor_gsm0710muxd_devpts vendor_volte_imsm_devpts }:chr_file ioctl { 0x5401 0x5402 };
+allow vendor_init radio_device:lnk_file unlink;
+allow vendor_init radio_device:dir { create getattr search setattr write remove_name };

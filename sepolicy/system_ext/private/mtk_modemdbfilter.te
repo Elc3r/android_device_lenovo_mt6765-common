@@ -1,0 +1,5 @@
+type mtk_modemdbfilter, domain, coredomain;
+type mtk_modemdbfilter_exec, exec_type, system_file_type, file_type;
+
+init_daemon_domain(mtk_modemdbfilter)
+hwbinder_use(mtk_modemdbfilter)

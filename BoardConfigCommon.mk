@@ -6,6 +6,25 @@
 
 COMMON_PATH := device/lenovo/mt6765-common
 
+BOARD_VENDOR_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/vendor
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/system_ext/private
+SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(COMMON_PATH)/sepolicy/system_ext/public
+
+SOONG_CONFIG_NAMESPACES += lineageRilAudit
+SOONG_CONFIG_lineageRilAudit += enabled
+SOONG_CONFIG_lineageRilAudit_enabled := false
+SOONG_CONFIG_NAMESPACES += lineageEcmExport
+SOONG_CONFIG_lineageEcmExport += enabled
+SOONG_CONFIG_lineageEcmExport_enabled := false
+ifeq ($(TARGET_PRODUCT),lineage_achilles6_row_data)
+SOONG_CONFIG_lineageEcmExport_enabled := true
+endif
+ifeq ($(TARGET_BUILD_VARIANT),userdebug)
+ifeq ($(LINEAGE_RIL_PROPERTY_AUDIT),true)
+SOONG_CONFIG_lineageRilAudit_enabled := true
+endif
+endif
+
 # APEX
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 
@@ -39,7 +58,7 @@ DEVICE_MANIFEST_FILE += $(COMMON_PATH)/manifest.xml
 # Kernel
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_BOOT_HEADER_VERSION := 2
-BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive androidboot.init_fatal_reboot_target=recovery androidboot.hardware=mt6765
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=enforcing androidboot.init_fatal_reboot_target=recovery androidboot.hardware=mt6765
 BOARD_KERNEL_BASE := 0x40078000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x07808000

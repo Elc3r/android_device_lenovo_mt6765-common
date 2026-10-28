@@ -1,0 +1,21 @@
+# Init's system-owned public control API, split by exact action/service pair.
+# No legacy ctl.<service> permission: that route authorizes all three actions.
+system_public_prop(vendor_ctl_ccci_fsd_start_prop)
+system_public_prop(vendor_ctl_ccci_fsd_stop_prop)
+system_public_prop(vendor_ctl_gsm0710muxd_start_prop)
+system_public_prop(vendor_ctl_gsm0710muxd_stop_prop)
+system_public_prop(vendor_ctl_mtk_ril_stop_prop)
+
+set_prop(vendor_ccci_mdinit, vendor_ctl_ccci_fsd_start_prop)
+set_prop(vendor_ccci_mdinit, vendor_ctl_ccci_fsd_stop_prop)
+set_prop(vendor_ccci_mdinit, vendor_ctl_gsm0710muxd_start_prop)
+set_prop(vendor_ccci_mdinit, vendor_ctl_gsm0710muxd_stop_prop)
+set_prop(vendor_ccci_mdinit, vendor_ctl_mtk_ril_stop_prop)
+
+neverallow { domain -init -vendor_init -vendor_ccci_mdinit } {
+    vendor_ctl_ccci_fsd_start_prop
+    vendor_ctl_ccci_fsd_stop_prop
+    vendor_ctl_gsm0710muxd_start_prop
+    vendor_ctl_gsm0710muxd_stop_prop
+    vendor_ctl_mtk_ril_stop_prop
+}:property_service set;

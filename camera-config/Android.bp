@@ -1,0 +1,9 @@
+python_binary_host {
+    name: "lenovo_camera_config_migration",
+    main: "migrate.py",
+    srcs: ["migrate.py"],
+    version: {
+        py2: { enabled: false },
+        py3: { enabled: true, embedded_launcher: true },
+    },
+}

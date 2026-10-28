@@ -1,0 +1,35 @@
+{
+  "input_sha256": "9d61663f1310a11e1eaf4da28a592c0d1be6c5b6a6776940a506ad984c3d1fa3",
+  "r1_sha256": "92157804874834ab20d07963af4ddce2d78502a04f21b27fe7574644a3321eba",
+  "output_sha256": "41d32484e1a8ec35cfc1d88814d6736a15b6290e3dfd385b4bfcfbf48b0075a8",
+  "size": 32972,
+  "r1_prepare_sha256": "76c4ce3039c406ad93c54aa3433f999c8d361ac986466b4e517f1088861e95da",
+  "r1_report_sha256": "f75691d2f1859b7f3e2c5d678ae9ab788eada4759bf8048d6fb3c89ec7ee44c9",
+  "allocations": [
+    {
+      "name": "worker-code",
+      "start": 14076,
+      "end": 14080,
+      "before_sha256": "72290caf6505593754468543a10fac9e2fc0c5048479c349d0bd172241e72114",
+      "after_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "before": "f0b587b0",
+      "after": "00207047"
+    },
+    {
+      "name": "exidx-entry",
+      "start": 496,
+      "end": 504,
+      "before_sha256": "db53b308f3b1fad2d933740daee4538b7b15a75e6e3809494419b9784fdcfd45",
+      "after_sha256": "b744e2cae68cef09d100f491d3e39c3f7c728123650d4edc9aa74b40e151c5ab",
+      "before": "0c350000b0ab0680",
+      "after": "0c350000b0b0b080"
+    },
+    {
+      "name": "compressed-debugdata",
+      "start": 29694,
+      "end": 31850,
+      "before_sha256": "e2d2c14cfdc14469dceac7efc8f522c99c39e5f38105619550997854f6faa1e9",
+      "after_sha256": "d9cb28d6faee4a52a2d94ca90fadff5ad4e7cc5938da41820ec0fcca74ce051e"
+    }
+  ]
+}

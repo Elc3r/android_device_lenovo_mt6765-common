@@ -1,0 +1,10 @@
+hal_server_domain(vendor_mtkpower, hal_power)
+hal_attribute_hwservice(hal_vendor_mtkpower, vendor_power_extension_hwservice)
+hal_attribute_hwservice(hal_camera, vendor_camera_background_hwservice)
+hal_attribute_hwservice(hal_telephony, vendor_radio_extension_hwservice)
+hal_attribute_hwservice(hal_wifi_supplicant, vendor_supplicant_extension_hwservice)
+add_hwservice(vendor_netdagent, vendor_netdagent_hwservice)
+
+hal_client_domain(hal_camera_default, hal_graphics_allocator)
+hal_attribute_hwservice(hal_camera, vendor_camera_postproc_hwservice)
+hal_attribute_hwservice(hal_camera, vendor_camera_atms_hwservice)

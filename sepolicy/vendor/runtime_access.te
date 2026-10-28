@@ -1,0 +1,14 @@
+allow hal_audio_default vendor_sysfs_audio_codec:file { open read };
+allow hal_memtrack_default vendor_debugfs_pvr_stats:file { getattr open read };
+
+allow hal_graphics_composer_default vendor_mtk_cmdq_device:chr_file { open read ioctl };
+allowxperm hal_graphics_composer_default vendor_mtk_cmdq_device:chr_file ioctl { 0x780b 0x7814 0x7815 0x7816 };
+allowxperm hal_graphics_composer_default vendor_proc_ged:file ioctl { 0x6700 };
+allow hal_graphics_composer_default self:netlink_kobject_uevent_socket { create bind setopt };
+vndbinder_use(hal_graphics_composer_default)
+
+allow vendor_pq graphics_device:chr_file { open read ioctl };
+allowxperm vendor_pq graphics_device:chr_file ioctl { 0x7817 0x7818 0x7840 0x784f };
+
+allow vendor_mtkpower vendor_proc_power_dvfs:file { open read };
+allow vendor_mtkpower vendor_proc_power_control:file { getattr open write };
