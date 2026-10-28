@@ -1,6 +1,7 @@
 vendor.mediatek.hardware.mtkpower::IMtkPower u:object_r:vendor_mtkpower_hwservice:s0
 vendor.mediatek.hardware.mtkpower::IMtkPerf u:object_r:vendor_mtkpower_hwservice:s0
 vendor.mediatek.hardware.pq::IPictureQuality u:object_r:vendor_pq_hwservice:s0
+vendor.mediatek.hardware.mms::IMms u:object_r:vendor_mms_hwservice:s0
 vendor.mediatek.hardware.lbs::ILbs u:object_r:vendor_lbs_hwservice:s0
 vendor.mediatek.hardware.gpu::IGraphicExt u:object_r:vendor_mtk_gpu_hwservice:s0
 vendor.mediatek.hardware.keyinstall::IKeyinstall u:object_r:vendor_keyinstall_hwservice:s0

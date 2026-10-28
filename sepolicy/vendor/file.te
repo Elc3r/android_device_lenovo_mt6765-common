@@ -6,6 +6,8 @@ type vendor_teei_vfs_device, dev_type;
 type vendor_rpmb_device, dev_type;
 type vendor_sensor_calibration_file, file_type;
 type vendor_mtk_cmdq_device, dev_type;
+type vendor_vcodec_device, dev_type;
+type vendor_sw_sync_device, dev_type;
 type vendor_sysfs_audio_codec, fs_type, sysfs_type;
 type vendor_debugfs_pvr_stats, fs_type, debugfs_type;
 type vendor_proc_power_dvfs, fs_type, proc_type;

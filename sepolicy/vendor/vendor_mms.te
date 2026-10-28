@@ -1,0 +1,27 @@
+# MediaTek graphics conversion service used by the vendor EGL client library.
+# The stock client contract is app-visible; it is not the telephony MMS API.
+type vendor_mms, domain;
+type vendor_mms_exec, exec_type, vendor_file_type, file_type;
+type vendor_mms_hwservice, hwservice_manager_type;
+init_daemon_domain(vendor_mms)
+hwbinder_use(vendor_mms)
+add_hwservice(vendor_mms, vendor_mms_hwservice)
+
+allow { appdomain -isolated_app } vendor_mms_hwservice:hwservice_manager find;
+binder_call({ appdomain -isolated_app }, vendor_mms)
+binder_call(vendor_mms, { appdomain -isolated_app })
+
+hal_client_domain(vendor_mms, hal_allocator)
+hal_client_domain(vendor_mms, hal_graphics_allocator)
+allow vendor_mms hal_graphics_mapper_hwservice:hwservice_manager find;
+allow vendor_mms same_process_hal_file:file { getattr open read map execute };
+allow vendor_mms ion_device:chr_file { getattr open read ioctl map };
+allowxperm vendor_mms ion_device:chr_file ioctl { 0x4900 0x4901 0x4902 0x4903 0x4904 0x4905 0x4906 0x4907 0x4908 0x4909 };
+allow vendor_mms graphics_device:chr_file { getattr open read write ioctl map };
+allowxperm vendor_mms graphics_device:chr_file ioctl { 0x4600 0x4fc9 0x4fd0 0x5700 0x5701 };
+allow vendor_mms vendor_mtk_cmdq_device:chr_file { open read ioctl };
+allowxperm vendor_mms vendor_mtk_cmdq_device:chr_file ioctl { 0x7801 0x7802 0x7804 0x780b 0x780c 0x7814 0x7815 0x7816 0x7817 0x783d 0x7842 };
+allow vendor_mms vendor_sw_sync_device:chr_file { getattr open read write ioctl };
+allowxperm vendor_mms vendor_sw_sync_device:chr_file ioctl { 0x5700 0x5701 };
+allow vendor_mms vendor_proc_ged:file { getattr open read ioctl };
+allowxperm vendor_mms vendor_proc_ged:file ioctl { 0x6764 0x6765 0x6766 0x6769 };

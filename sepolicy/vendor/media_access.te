@@ -19,8 +19,14 @@ allow hal_memtrack_default vendor_debugfs_ion_summary:file { getattr open read }
 allow mediacodec graphics_device:chr_file { open read ioctl };
 allowxperm mediacodec graphics_device:chr_file ioctl { 0x4600 0x4fc9 0x4fd0 };
 
+# MediaTek decoder FD/mapping and initialization, lock/wait/unlock, power and
+# teardown operations. Keep these on the exact codec node, never generic device.
+allow mediacodec vendor_vcodec_device:chr_file { getattr open read write map ioctl };
+# 0x4d31 is the CPU-count query used by the vendor software HEVC backend.
+allowxperm mediacodec vendor_vcodec_device:chr_file ioctl { 0x4d0b 0x4d0d 0x4d15 0x4d16 0x4d17 0x4d18 0x4d27 0x4d28 0x4d31 0x4d33 0x4d37 };
+
 allowxperm bootanim vendor_proc_ged:file ioctl { 0x6700 0x6709 };
-allowxperm mediacodec vendor_proc_ged:file ioctl { 0x670e };
+allowxperm mediacodec vendor_proc_ged:file ioctl { 0x670e 0x6764 0x6766 0x6769 };
 allowxperm surfaceflinger vendor_proc_ged:file ioctl { 0x6700 0x6709 };
 allowxperm system_server vendor_proc_ged:file ioctl { 0x6700 0x6703 0x6704 0x6705 0x6709 0x670d 0x6766 };
 
@@ -33,6 +39,8 @@ allow hal_camera_default vendor_camera_focus_device:chr_file { open read write i
 allowxperm hal_camera_default vendor_camera_focus_device:chr_file ioctl { 0x4101 0x4105 0x410a };
 allow hal_camera_default vendor_camera_smi_device:chr_file { open read ioctl };
 allowxperm hal_camera_default vendor_camera_smi_device:chr_file ioctl { 0x4f18 0x4f1c 0x4f1d 0x4f58 0x4f59 };
+allow mediacodec vendor_camera_smi_device:chr_file { getattr open read write ioctl };
+allowxperm mediacodec vendor_camera_smi_device:chr_file ioctl { 0x4f18 0x4f1c 0x4f1d };
 allow hal_camera_default vendor_camera_ccu_device:chr_file { open read write ioctl };
 allowxperm hal_camera_default vendor_camera_ccu_device:chr_file ioctl { 0x6300 0x6301 0x6302 0x6309 0x630b 0x6313 0x6314 0x6315 0x6316 0x6317 0x6318 0x6319 };
 allow hal_camera_default vendor_proc_camera_thermal:file { open read write };

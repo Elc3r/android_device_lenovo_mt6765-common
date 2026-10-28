@@ -18,6 +18,12 @@ interface, logging and build compatibility patches from the integration repo.
 
 ## Tested behavior
 
+DiPlay CarPlay and forced HEVC playback were tested with SELinux Enforcing on
+the same tablet. The policy includes a dedicated Vcodec node, exact codec/GED
+commands, an app-visible MMS graphics-conversion service and the CPU-count query
+used by the observed vendor software HEVC backend. This is not a claim of
+hardware-accelerated HEVC or complete codec/profile coverage.
+
 Android cold-boots with SELinux **Enforcing**. The tested userdebug build
 retains standard `su` and `backuptool` permissive domains. Hardware Beanpod
 Keymaster matches recovery; FBE and PIN-protected TWRP decryption work with
